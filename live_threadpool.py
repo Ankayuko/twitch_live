@@ -16,11 +16,9 @@ def file_read(file_name:str):
   with open(file_name, "r") as raid_list:
       username_list = sorted(raid_list.read().splitlines())
   raid_list.close()
-
   url_list = []
   for i in range(0, len(username_list)):
     url_list.append('https://api.twitch.tv/helix/streams?user_login=' + username_list[i])
-
   return [username_list, url_list]
 
 
@@ -29,14 +27,12 @@ def generate_access_token():
     myobj = {'client_id': Credentials.client_id,
             'client_secret': Credentials.client_secret,
             'grant_type' : 'client_credentials'}
-
     response = requests.post(url, json = myobj).json()
     return response['access_token']
 
+
 def send_get_request(url, headers):
-    # 
     response = requests.get(url, headers=headers)
-    # responses.append(requests.get(url, headers=headers))
     return response
 
 
